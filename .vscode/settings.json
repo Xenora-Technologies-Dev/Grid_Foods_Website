@@ -1,0 +1,20 @@
+{
+  // Disable the built-in CSS validator — it doesn't understand Tailwind's @tailwind/@apply directives.
+  // The Tailwind CSS IntelliSense extension handles validation instead.
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+
+  // Tell VS Code to use the workspace TypeScript version (from node_modules)
+  // so it picks up the Next.js plugin and @/ path aliases correctly.
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+
+  // Tailwind CSS IntelliSense: point to the config file
+  "tailwindCSS.experimental.configFile": "tailwind.config.js",
+
+  // File associations
+  "files.associations": {
+    "*.css": "css"
+  }
+}
