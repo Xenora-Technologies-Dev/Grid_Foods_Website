@@ -1,218 +1,332 @@
-import type { Metadata } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Target, Eye, ShieldCheck, Truck, TrendingUp, Users, ArrowRight } from 'lucide-react';
+'use client';
 
-export const metadata: Metadata = {
-  title: 'About Us | Grid Foods LLC — Frozen Food Distributor Dubai',
-  description:
-    'Learn about Grid Foods LLC — a Dubai-based food trading company supplying premium frozen foods to HORECA, supermarkets, and bulk buyers across the UAE since 2018.',
-  alternates: {
-    canonical: 'https://gridfoods.ae/about',
-  },
+import { motion } from 'framer-motion';
+import { Metadata } from 'next';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Globe, Shield, Truck, Users, Award, Heart, Target, TrendingUp, CheckCircle } from 'lucide-react';
+import { companyInfo, certifications, exportMarkets } from '@/lib/data';
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.1, duration: 0.6 } }),
 };
 
-const values = [
-  {
-    icon: ShieldCheck,
-    title: 'Quality Assurance',
-    description:
-      'Every product in our portfolio undergoes rigorous quality checks. We source only from internationally certified suppliers that meet UAE food safety standards.',
-  },
-  {
-    icon: Truck,
-    title: 'Reliable Supply Chain',
-    description:
-      'We maintain strategic inventory and work with a network of trusted logistics partners to ensure timely, uninterrupted supply to our clients across the UAE.',
-  },
-  {
-    icon: TrendingUp,
-    title: 'Competitive Pricing',
-    description:
-      'Our strong supplier relationships and efficient operations allow us to offer best-in-market wholesale pricing without compromising on quality.',
-  },
-  {
-    icon: Users,
-    title: 'Client-First Approach',
-    description:
-      'Every client receives personalized attention. From custom orders to flexible payment terms, we tailor our services to your business needs.',
-  },
+const milestones = [
+  { year: '2023', title: 'Company Founded', description: 'Grid Foods LLC established in Dubai with a vision to become a leading frozen food distributor.' },
+  { year: '2023', title: 'HORECA Partnerships', description: 'Secured first contracts with major hotels, restaurants, and catering companies across Dubai.' },
+  { year: '2024', title: 'Product Expansion', description: 'Expanded product portfolio to 6 categories with 60+ SKUs covering seafood, poultry, meat, dairy, snacks, and grains.' },
+  { year: '2024', title: 'GCC Export Launch', description: 'Launched export operations to Saudi Arabia, Oman, and other GCC markets with full compliance.' },
+  { year: '2025', title: 'Supermarket Partnerships', description: 'Became an approved supplier for multiple retail chains and supermarkets across the UAE.' },
+  { year: '2026', title: 'Regional Expansion', description: 'Expanding into Africa, South Asia, and CIS markets with dedicated export logistics infrastructure.' },
 ];
 
-const milestones = [
-  { year: '2018', event: 'Grid Foods LLC founded in Dubai' },
-  { year: '2019', event: 'Expanded to 6 core product categories' },
-  { year: '2020', event: 'Grew to 50+ HORECA clients across Dubai' },
-  { year: '2022', event: 'UAE-wide distribution network established' },
-  { year: '2024', event: '100+ clients served across UAE' },
+const values = [
+  { icon: Shield, title: 'Quality First', description: 'Every product meets the highest food safety and halal certification standards without compromise.' },
+  { icon: Heart, title: 'Client Commitment', description: 'We build lasting partnerships with dedicated account management and personalized service.' },
+  { icon: Globe, title: 'Global Sourcing', description: 'Products sourced from certified international suppliers across 15+ countries worldwide.' },
+  { icon: Truck, title: 'Reliable Logistics', description: 'Temperature-controlled cold chain from source to delivery — never broken, always on time.' },
+  { icon: Target, title: 'Market Expertise', description: 'Deep understanding of UAE and GCC food distribution, regulations, and market demands.' },
+  { icon: TrendingUp, title: 'Growth Partnership', description: 'We grow with our clients — scaling supply, expanding SKUs, and adapting to their evolving needs.' },
+];
+
+const stats = [
+  { value: '150+', label: 'Clients Served' },
+  { value: '60+', label: 'Product SKUs' },
+  { value: '15+', label: 'Export Markets' },
+  { value: '6', label: 'Product Categories' },
 ];
 
 export default function AboutPage() {
   return (
-    <>
-      {/* Page Hero */}
-      <section className="bg-navy-gradient py-20 md:py-28 text-white">
-        <div className="container-custom">
-          <div className="max-w-3xl">
-            <span className="badge bg-accent/20 text-accent border border-accent/30 mb-5">
-              About Us
+    <main className="bg-primary text-white">
+      {/* Hero Section */}
+      <section className="relative pt-32 pb-20 overflow-hidden">
+        <div className="absolute inset-0 bg-dark-gradient" />
+        <div className="absolute inset-0 grid-pattern opacity-30" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="text-center max-w-3xl mx-auto"
+          >
+            <span className="inline-flex items-center gap-2 bg-accent/10 text-accent px-4 py-2 rounded-full text-sm font-medium border border-accent/20 mb-6">
+              <Award className="w-4 h-4" /> About Grid Foods LLC
             </span>
-            <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-5">
-              Your Trusted Food Distribution Partner in Dubai
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+              Dubai&apos;s Trusted
+              <span className="text-accent"> Frozen Food</span> Partner
             </h1>
-            <p className="text-white/70 text-lg leading-relaxed">
-              Grid Foods LLC is a Dubai-based food trading and distribution company delivering premium frozen foods to the UAE's hospitality, retail, and wholesale sectors.
+            <p className="text-lg text-gray-400 leading-relaxed">
+              Since {companyInfo.established}, Grid Foods LLC has been connecting global food producers with businesses across the UAE and GCC.
+              We import, store, distribute, and export premium frozen food products — serving HORECA, supermarkets, and wholesale buyers with reliability and excellence.
             </p>
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Company Overview */}
-      <section className="section-pad bg-white">
-        <div className="container-custom">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="section-title mb-5">
-                Who We Are
-              </h2>
-              <p className="text-gray-600 leading-relaxed mb-5">
-                Founded in 2018, Grid Foods LLC has grown into one of Dubai's reliable frozen food trading companies. We specialize in the import, distribution, and wholesale supply of high-quality frozen foods — from seafood and poultry to dairy, snacks, and staple grains.
-              </p>
-              <p className="text-gray-600 leading-relaxed mb-5">
-                Our clients include renowned HORECA establishments, major supermarket chains, and large-scale food distributors who rely on us for consistent quality, competitive pricing, and on-time delivery.
-              </p>
-              <p className="text-gray-600 leading-relaxed mb-8">
-                Operating from Dubai, we leverage our strategic location to source premium products from top global producers and deliver efficiently to clients across the United Arab Emirates.
-              </p>
-              <div className="flex flex-wrap gap-8">
-                {[['500+', 'Products'], ['100+', 'Clients'], ['6', 'Categories'], ['UAE', 'Coverage']].map(([num, label]) => (
-                  <div key={label} className="text-center">
-                    <div className="text-3xl font-bold text-accent mb-1">{num}</div>
-                    <div className="text-gray-500 text-sm font-medium">{label}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="relative">
-              <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
-                <Image
-                  src="https://images.unsplash.com/photo-1578574577315-3fbeb0cecdc2?w=800&auto=format&fit=crop"
-                  alt="Grid Foods LLC warehouse and cold storage"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/50 to-transparent" />
-              </div>
-              {/* Floating badge */}
-              <div className="absolute -bottom-6 -left-6 bg-accent text-white rounded-2xl px-6 py-4 shadow-xl">
-                <div className="text-2xl font-bold">6+ Years</div>
-                <div className="text-sm opacity-90">of Excellence in Dubai</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Mission & Vision */}
-      <section className="section-pad bg-gray-50">
-        <div className="container-custom">
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Mission */}
-            <div className="bg-primary rounded-2xl p-10 text-white relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
-              <div className="w-14 h-14 bg-accent/20 rounded-xl flex items-center justify-center mb-6">
-                <Target className="w-7 h-7 text-accent" />
-              </div>
-              <h2 className="text-2xl font-bold mb-4">Our Mission</h2>
-              <p className="text-white/70 leading-relaxed">
-                To be the UAE's most trusted frozen food distribution partner — delivering consistent quality, dependable supply, and exceptional value to every client we serve, from independent restaurants to large retail chains.
-              </p>
-            </div>
-
-            {/* Vision */}
-            <div className="bg-accent rounded-2xl p-10 text-white relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
-              <div className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center mb-6">
-                <Eye className="w-7 h-7 text-white" />
-              </div>
-              <h2 className="text-2xl font-bold mb-4">Our Vision</h2>
-              <p className="text-white/90 leading-relaxed">
-                To expand our reach across the GCC and become a premier food trading company known for product diversity, supply chain excellence, and a commitment to food safety and sustainability.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Why Choose Us */}
-      <section className="section-pad bg-white">
-        <div className="container-custom">
-          <div className="text-center mb-14">
-            <h2 className="section-title text-center">Why Choose Grid Foods?</h2>
-            <p className="section-subtitle mx-auto text-center">
-              We combine product quality, supply reliability, and personalized service to build long-term partnerships.
-            </p>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {values.map((value, index) => (
-              <div
-                key={value.title}
-                className="p-6 rounded-2xl border border-gray-100 hover:border-accent/30 hover:shadow-lg transition-all duration-300 group"
+      {/* Stats Bar */}
+      <section className="relative z-10 -mt-10">
+        <div className="max-w-5xl mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-4"
+          >
+            {stats.map((stat, i) => (
+              <motion.div
+                key={stat.label}
+                custom={i}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="bg-surface border border-white/5 rounded-2xl p-6 text-center"
               >
-                <div className="w-12 h-12 bg-orange-50 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                <div className="text-3xl md:text-4xl font-bold text-accent mb-1">{stat.value}</div>
+                <div className="text-sm text-gray-400">{stat.label}</div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Our Story */}
+      <section className="py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+            >
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                Our <span className="text-accent">Story</span>
+              </h2>
+              <div className="space-y-4 text-gray-400 leading-relaxed">
+                <p>
+                  Grid Foods LLC was founded in 2023 in Dubai with a clear mission: to become the most reliable frozen food partner for businesses in the UAE and beyond.
+                  What started as a focused distribution operation has rapidly grown into a comprehensive import, distribution, and export enterprise.
+                </p>
+                <p>
+                  We recognized a gap in the market — businesses needed a supplier that combined product quality, competitive pricing, and consistent reliability.
+                  Today, we serve over 150 clients including hotels, restaurants, catering companies, supermarkets, and international distributors across 15+ markets.
+                </p>
+                <p>
+                  Our strength lies in our relationships — with certified international producers across Asia, South America, and Europe,
+                  and with our clients who trust us to keep their operations running smoothly, every single day.
+                </p>
+              </div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="relative"
+            >
+              <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-white/10">
+                <img
+                  src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&auto=format&fit=crop"
+                  alt="Grid Foods warehouse operations"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="absolute -bottom-6 -left-6 bg-accent rounded-2xl p-6 shadow-2xl">
+                <div className="text-3xl font-bold text-white">Since</div>
+                <div className="text-4xl font-bold text-white">{companyInfo.established}</div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Values */}
+      <section className="py-24 bg-surface">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Our <span className="text-accent">Values</span>
+            </h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">The principles that drive every decision we make and every product we deliver.</p>
+          </motion.div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {values.map((value, i) => (
+              <motion.div
+                key={value.title}
+                custom={i}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="bg-dark-950 border border-white/5 rounded-2xl p-8 hover:border-accent/20 transition-colors"
+              >
+                <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center mb-4">
                   <value.icon className="w-6 h-6 text-accent" />
                 </div>
-                <h3 className="text-lg font-bold text-primary mb-2">{value.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{value.description}</p>
-              </div>
+                <h3 className="text-lg font-bold mb-2">{value.title}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed">{value.description}</p>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Company Timeline */}
-      <section className="section-pad bg-gray-50">
-        <div className="container-custom">
-          <div className="text-center mb-14">
-            <h2 className="section-title text-center">Our Journey</h2>
-            <p className="section-subtitle mx-auto text-center">
-              From a small trading operation to UAE-wide distribution — here's how we grew.
-            </p>
-          </div>
-          <div className="max-w-2xl mx-auto">
-            <div className="relative">
-              {/* Timeline line */}
-              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gray-200" />
-              <div className="flex flex-col gap-8">
-                {milestones.map((m, i) => (
-                  <div key={m.year} className="flex gap-6 items-start">
-                    <div className="relative w-16 h-16 bg-primary rounded-full flex items-center justify-center shrink-0 z-10">
-                      <span className="text-accent font-bold text-xs">{m.year}</span>
-                    </div>
-                    <div className="flex-1 pt-4">
-                      <p className="text-gray-700 font-medium">{m.event}</p>
-                    </div>
+      {/* Timeline / Milestones */}
+      <section className="py-24">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Our <span className="text-accent">Journey</span>
+            </h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">From a startup in Dubai to a regional frozen food enterprise — growing fast, staying reliable.</p>
+          </motion.div>
+          <div className="relative">
+            <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-white/10 md:-translate-x-px" />
+            {milestones.map((milestone, i) => (
+              <motion.div
+                key={i}
+                custom={i}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className={`relative flex items-start gap-8 mb-12 ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
+              >
+                <div className="hidden md:block flex-1" />
+                <div className="absolute left-4 md:left-1/2 w-3 h-3 bg-accent rounded-full -translate-x-1.5 mt-2 ring-4 ring-primary" />
+                <div className="flex-1 ml-12 md:ml-0">
+                  <div className="bg-surface border border-white/5 rounded-2xl p-6">
+                    <span className="text-accent font-bold text-sm">{milestone.year}</span>
+                    <h3 className="font-bold text-lg mt-1 mb-2">{milestone.title}</h3>
+                    <p className="text-gray-400 text-sm leading-relaxed">{milestone.description}</p>
                   </div>
-                ))}
-              </div>
-            </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Certifications */}
+      <section className="py-24 bg-surface">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Certifications & <span className="text-accent">Compliance</span>
+            </h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">We maintain the highest standards of food safety, halal certification, and regulatory compliance.</p>
+          </motion.div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {certifications.map((cert, i) => (
+              <motion.div
+                key={cert.name}
+                custom={i}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="bg-dark-950 border border-white/5 rounded-2xl p-6 flex items-start gap-4"
+              >
+                <span className="text-3xl">{cert.icon}</span>
+                <div>
+                  <h3 className="font-bold mb-1">{cert.name}</h3>
+                  <p className="text-gray-400 text-sm">{cert.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Export Markets */}
+      <section className="py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <span className="text-accent">Export</span> Markets
+            </h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">We export premium frozen food products to businesses across the GCC and beyond.</p>
+          </motion.div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {exportMarkets.map((market, i) => (
+              <motion.div
+                key={market.region}
+                custom={i}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="bg-surface border border-white/5 rounded-2xl p-6"
+              >
+                <Globe className="w-8 h-8 text-accent mb-3" />
+                <h3 className="font-bold text-lg mb-3">{market.region}</h3>
+                <ul className="space-y-1.5">
+                  {market.countries.map((country) => (
+                    <li key={country} className="text-gray-400 text-sm flex items-center gap-2">
+                      <CheckCircle className="w-3.5 h-3.5 text-accent" />
+                      {country}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-16 bg-primary text-white">
-        <div className="container-custom text-center">
-          <h2 className="text-3xl font-bold mb-4">Partner with Grid Foods Today</h2>
-          <p className="text-white/70 text-lg mb-8 max-w-xl mx-auto">
-            Join over 100 businesses in the UAE who trust Grid Foods for their frozen food supply needs.
-          </p>
-          <Link href="/contact" className="btn-primary text-base px-8 py-4">
-            Get in Touch <ArrowRight className="w-5 h-5" />
-          </Link>
+      <section className="py-24 bg-accent">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Partner with Us?</h2>
+            <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
+              Whether you&apos;re a hotel, restaurant, supermarket, or international distributor — we&apos;re ready to become your trusted frozen food partner.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link
+                href="/contact"
+                className="bg-white text-primary font-semibold px-8 py-4 rounded-xl hover:bg-gray-100 transition-colors"
+              >
+                Get in Touch
+              </Link>
+              <Link
+                href="/products"
+                className="bg-white/10 text-white border border-white/20 font-semibold px-8 py-4 rounded-xl hover:bg-white/20 transition-colors"
+              >
+                Browse Products
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
-    </>
+    </main>
   );
 }

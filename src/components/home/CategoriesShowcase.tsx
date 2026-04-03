@@ -9,9 +9,7 @@ import { categories, type ProductCategory } from '@/lib/data';
 const containerVariants = {
   hidden: {},
   visible: {
-    transition: {
-      staggerChildren: 0.1,
-    },
+    transition: { staggerChildren: 0.1 },
   },
 };
 
@@ -20,12 +18,9 @@ const cardVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
-/**
- * Product categories showcase grid on the homepage.
- */
 export default function CategoriesShowcase() {
   return (
-    <section className="section-pad bg-gray-50" id="products">
+    <section className="section-pad bg-primary" id="products">
       <div className="container-custom">
         {/* Section Header */}
         <div className="text-center mb-14">
@@ -53,7 +48,7 @@ export default function CategoriesShowcase() {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            From frozen seafood to staple grains — we supply it all with quality assurance and reliable cold-chain logistics.
+            From frozen seafood to staple grains — we supply it all with quality assurance, cold-chain logistics, and export-ready packaging.
           </motion.p>
         </div>
 
@@ -69,32 +64,37 @@ export default function CategoriesShowcase() {
             <motion.div key={cat.id} variants={cardVariants}>
               <Link href={`/products/${cat.slug}`} className="card group block h-full">
                 {/* Category Image */}
-                <div className="relative h-52 overflow-hidden">
+                <div className="relative h-44 sm:h-52 overflow-hidden">
                   <Image
                     src={cat.image}
                     alt={cat.name}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover group-hover:scale-110 transition-transform duration-700"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent" />
-                  <span className="absolute top-4 left-4 text-3xl">{cat.icon}</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/40 to-transparent" />
+                  <span className="absolute top-4 left-4 text-3xl drop-shadow-lg">{cat.icon}</span>
+                  {cat.exportAvailable && (
+                    <span className="absolute top-4 right-4 text-[10px] font-bold uppercase tracking-wider bg-accent/90 text-white px-2 py-0.5 rounded-full">
+                      Export Ready
+                    </span>
+                  )}
                 </div>
 
                 {/* Card Content */}
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-primary mb-2 group-hover:text-accent transition-colors">
+                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-accent transition-colors">
                     {cat.name}
                   </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-2">
+                  <p className="text-white/50 text-sm leading-relaxed mb-4 line-clamp-2">
                     {cat.description}
                   </p>
 
                   {/* Sample items */}
                   <div className="flex flex-wrap gap-1.5 mb-4">
-                    {cat.items.slice(0, 3).map((item: string) => (
-                      <span key={item} className="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">
-                        {item}
+                    {cat.items.slice(0, 3).map((item) => (
+                      <span key={item.name} className="text-xs bg-white/5 text-white/50 px-2.5 py-1 rounded-full border border-white/5">
+                        {item.name}
                       </span>
                     ))}
                     {cat.items.length > 3 && (

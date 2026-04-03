@@ -8,36 +8,53 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        navy: {
-          50: '#f0f4ff',
-          100: '#e0e9ff',
-          200: '#c7d7fe',
-          300: '#a5b9fc',
-          400: '#8196f8',
-          500: '#6272f1',
-          600: '#4c53e5',
-          700: '#3d42ca',
-          800: '#3337a3',
-          900: '#0a1628',
-          950: '#060d1a',
+        // Dark premium theme inspired by Grid Foods logo
+        dark: {
+          50: '#f7f7f7',
+          100: '#e3e3e3',
+          200: '#c8c8c8',
+          300: '#a4a4a4',
+          400: '#818181',
+          500: '#666666',
+          600: '#515151',
+          700: '#434343',
+          800: '#383838',
+          900: '#1C2526',
+          950: '#111111',
         },
         primary: {
-          DEFAULT: '#0a1628',
-          light: '#112240',
-          dark: '#060d1a',
+          DEFAULT: '#111111',
+          light: '#1C2526',
+          dark: '#0A0A0A',
         },
         accent: {
-          DEFAULT: '#f97316',
-          light: '#fb923c',
-          dark: '#ea6a0a',
+          DEFAULT: '#FF6200',
+          light: '#FF7D2E',
+          dark: '#E05600',
+          50: '#FFF4ED',
+          100: '#FFE4CC',
+          200: '#FFC999',
+          300: '#FFAD66',
+          400: '#FF8533',
+          500: '#FF6200',
+          600: '#E05600',
+          700: '#B84700',
+          800: '#8F3700',
+          900: '#662800',
+        },
+        surface: {
+          DEFAULT: '#1A1A1A',
+          light: '#222222',
+          lighter: '#2A2A2A',
+          card: '#1E1E1E',
         },
         green: {
           fresh: '#22c55e',
         },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        heading: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        heading: ['var(--font-inter)', 'system-ui', 'sans-serif'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -47,6 +64,9 @@ module.exports = {
         'fade-in': 'fadeIn 0.5s ease-in-out',
         'slide-up': 'slideUp 0.6s ease-out',
         'float': 'float 3s ease-in-out infinite',
+        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'shimmer': 'shimmer 2s linear infinite',
+        'glow': 'glow 2s ease-in-out infinite alternate',
       },
       keyframes: {
         fadeIn: {
@@ -60,6 +80,14 @@ module.exports = {
         float: {
           '0%, 100%': { transform: 'translateY(0px)' },
           '50%': { transform: 'translateY(-10px)' },
+        },
+        shimmer: {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
+        },
+        glow: {
+          '0%': { boxShadow: '0 0 20px rgba(255, 98, 0, 0.2)' },
+          '100%': { boxShadow: '0 0 40px rgba(255, 98, 0, 0.4)' },
         },
       },
     },

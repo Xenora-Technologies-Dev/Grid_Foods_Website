@@ -1,20 +1,20 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Phone, Mail, MapPin, Instagram, Linkedin, Facebook } from 'lucide-react';
+import { Phone, Mail, MapPin, Instagram, Linkedin, Facebook, Globe } from 'lucide-react';
 import { categories, companyInfo, type ProductCategory } from '@/lib/data';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-primary text-white">
+    <footer className="bg-dark-950 text-white border-t border-white/5">
       {/* Main Footer */}
       <div className="container-custom py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand Column */}
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-3 mb-5">
-              <div className="relative w-10 h-10 bg-white/10 rounded-lg p-1">
+              <div className="relative w-10 h-10 bg-white/90 rounded-xl border border-white/20 shadow-lg p-1.5">
                 <Image
                   src="/assets/Grid_Foods_Logo.png"
                   alt="Grid Foods LLC"
@@ -24,11 +24,15 @@ export default function Footer() {
               </div>
               <div>
                 <span className="font-bold text-lg leading-none">Grid Foods</span>
-                <span className="text-accent text-xs font-medium block">LLC</span>
+                <span className="text-accent text-[10px] font-semibold tracking-widest block uppercase">LLC</span>
+              </div>
+              <div>
+                <span className="text-accent text-[10px] font-semibold tracking-widest block uppercase">Design and Developed By</span>
+                <span className="font-bold text-lg leading-none">Xenora Technologies</span>
               </div>
             </Link>
-            <p className="text-white/60 text-sm leading-relaxed mb-6">
-              Dubai's trusted frozen food trading and distribution company. Supplying premium products to HORECA, supermarkets, and bulk buyers across the UAE.
+            <p className="text-white/40 text-sm leading-relaxed mb-6">
+              Dubai&apos;s premium frozen food trading, distribution, and export company. Supplying halal-certified products to HORECA, supermarkets, and bulk buyers across the UAE and GCC since 2023.
             </p>
             {/* Social Icons */}
             <div className="flex items-center gap-3">
@@ -41,7 +45,7 @@ export default function Footer() {
                   key={label}
                   href={href}
                   aria-label={label}
-                  className="w-9 h-9 rounded-lg bg-white/10 hover:bg-accent flex items-center justify-center transition-colors"
+                  className="w-9 h-9 rounded-lg bg-white/5 hover:bg-accent border border-white/5 hover:border-accent flex items-center justify-center transition-all"
                 >
                   <Icon className="w-4 h-4" />
                 </a>
@@ -51,19 +55,22 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-semibold text-base mb-5 text-white">Quick Links</h3>
+            <h3 className="font-semibold text-sm mb-5 text-white uppercase tracking-wider">Quick Links</h3>
             <ul className="space-y-2.5">
               {[
                 { label: 'Home', href: '/' },
                 { label: 'About Us', href: '/about' },
                 { label: 'Products', href: '/products' },
+                { label: 'Export Services', href: '/export' },
+                { label: 'Blog', href: '/blog' },
+                { label: 'Certifications', href: '/certifications' },
                 { label: 'Contact Us', href: '/contact' },
                 { label: 'Get a Quote', href: '/contact#quote' },
               ].map(({ label, href }) => (
                 <li key={href}>
                   <Link
                     href={href}
-                    className="text-white/60 hover:text-accent text-sm transition-colors flex items-center gap-2 group"
+                    className="text-white/40 hover:text-accent text-sm transition-colors flex items-center gap-2 group"
                   >
                     <span className="w-1 h-1 rounded-full bg-accent opacity-0 group-hover:opacity-100 transition-opacity" />
                     {label}
@@ -75,15 +82,15 @@ export default function Footer() {
 
           {/* Product Categories */}
           <div>
-            <h3 className="font-semibold text-base mb-5 text-white">Our Products</h3>
+            <h3 className="font-semibold text-sm mb-5 text-white uppercase tracking-wider">Our Products</h3>
             <ul className="space-y-2.5">
               {categories.map((cat: ProductCategory) => (
                 <li key={cat.id}>
                   <Link
                     href={`/products/${cat.slug}`}
-                    className="text-white/60 hover:text-accent text-sm transition-colors flex items-center gap-2 group"
+                    className="text-white/40 hover:text-accent text-sm transition-colors flex items-center gap-2 group"
                   >
-                    <span className="w-1 h-1 rounded-full bg-accent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <span className="text-xs">{cat.icon}</span>
                     {cat.name}
                   </Link>
                 </li>
@@ -93,12 +100,12 @@ export default function Footer() {
 
           {/* Contact Info */}
           <div>
-            <h3 className="font-semibold text-base mb-5 text-white">Contact Us</h3>
+            <h3 className="font-semibold text-sm mb-5 text-white uppercase tracking-wider">Contact Us</h3>
             <ul className="space-y-4">
               <li>
                 <a
                   href={`tel:${companyInfo.phone}`}
-                  className="flex items-start gap-3 text-white/60 hover:text-accent transition-colors group"
+                  className="flex items-start gap-3 text-white/40 hover:text-accent transition-colors"
                 >
                   <Phone className="w-4 h-4 mt-0.5 text-accent shrink-0" />
                   <span className="text-sm">{companyInfo.phone}</span>
@@ -107,16 +114,22 @@ export default function Footer() {
               <li>
                 <a
                   href={`mailto:${companyInfo.email}`}
-                  className="flex items-start gap-3 text-white/60 hover:text-accent transition-colors"
+                  className="flex items-start gap-3 text-white/40 hover:text-accent transition-colors"
                 >
                   <Mail className="w-4 h-4 mt-0.5 text-accent shrink-0" />
                   <span className="text-sm">{companyInfo.email}</span>
                 </a>
               </li>
               <li>
-                <div className="flex items-start gap-3 text-white/60">
+                <div className="flex items-start gap-3 text-white/40">
                   <MapPin className="w-4 h-4 mt-0.5 text-accent shrink-0" />
                   <span className="text-sm">{companyInfo.address}</span>
+                </div>
+              </li>
+              <li>
+                <div className="flex items-start gap-3 text-white/40">
+                  <Globe className="w-4 h-4 mt-0.5 text-accent shrink-0" />
+                  <span className="text-sm">Exporting to GCC &amp; International</span>
                 </div>
               </li>
             </ul>
@@ -138,13 +151,13 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-white/10">
+      <div className="border-t border-white/5">
         <div className="container-custom py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-white/40 text-sm">
-            © {currentYear} Grid Foods LLC. All rights reserved.
+          <p className="text-white/25 text-sm">
+            &copy; {currentYear} Grid Foods LLC. All rights reserved.
           </p>
-          <p className="text-white/40 text-sm">
-            Dubai, United Arab Emirates
+          <p className="text-white/25 text-sm">
+            Premium Frozen Food Solutions — Dubai, UAE
           </p>
         </div>
       </div>
